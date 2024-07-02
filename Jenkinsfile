@@ -1,28 +1,14 @@
 pipeline {
     agent any
-    stages {
-        stage('No-op') {
-            steps {
-                sh 'ls'
-            }
-        }
+    options {
+        // Timeout counter starts AFTER agent is allocated
+        timeout(time: 1, unit: 'SECONDS')
     }
-    post {
-        always {
-            echo 'One way or another, I have finished'
-            deleteDir() 
-        }
-        success {
-            echo 'I succeeded!'
-        }
-        unstable {
-            echo 'I am unstable :/'
-        }
-        failure {
-            echo 'I failed :('
-        }
-        changed {
-            echo 'Things were different before...'
+    stages {
+        stage('Example') {
+            steps {
+                echo 'Hello World'
+            }
         }
     }
 }
