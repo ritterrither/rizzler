@@ -1,14 +1,17 @@
 pipeline {
     agent any
-    options {
-        // Timeout counter starts AFTER agent is allocated
-        timeout(time: 1, unit: 'SECONDS')
-    }
     stages {
-        stage('Example') {
+        stage('No-op') {
             steps {
-                echo 'Hello World'
+                sh 'ls'
             }
         }
+    }
+    post {
+        failure {
+        mail to: 'rither.le@avepoint.com',
+             subject: "Failed Pipeline",
+             body: "Something is wrong with the build urgh smh"
+    }
     }
 }
