@@ -1,9 +1,10 @@
+Jenkinsfile (Declarative Pipeline)
 pipeline {
-    agent { docker { image 'node:20.15.0-alpine3.20' } }
+    agent any
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                sh 'node --version'
+                bat 'set'
             }
         }
     }
