@@ -1,11 +1,13 @@
 pipeline {
-    agent {
-        docker { image 'node:20.15.0-alpine3.20' }
+    agent any
+    options {
+        // Timeout counter starts AFTER agent is allocated
+        timeout(time: 1, unit: 'SECONDS')
     }
     stages {
-        stage('Test') {
+        stage('Example') {
             steps {
-                sh 'node --version'
+                echo 'Hello World'
             }
         }
     }
