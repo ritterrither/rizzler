@@ -1,17 +1,23 @@
 pipeline {
     agent any
+    options {
+        skipStagesAfterUnstable()
+    }
     stages {
-        stage('No-op') {
+        stage('Build') {
             steps {
-                sh 'ls'
+                echo 'Building'
             }
         }
-    }
-    post {
-        failure {
-        mail to: 'rither.le@avepoint.com',
-             subject: "Failed Pipeline",
-             body: "Something is wrong with the build urgh smh"
-    }
+        stage('Test') {
+            steps {
+                echo 'Testing'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying'
+            }
+        }
     }
 }
